@@ -1,0 +1,12 @@
+composer create-project --prefer-dist laravel/laravel muslu
+php artisan serve  = start server
+php artisan make:controller HomeController
+php artisan make:request LoginRequest
+php artisan make:model Artist -m
+php artisan migrate 
+php artisan migrate:rollback --step=4 php artisan migrate:request
+php artisan config:cache
+php artisan preset none = delete react and vue
+php artisan route:list
+php artisan cache:clear
+php artisan make:migration add_api_token --table=users
