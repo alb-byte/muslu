@@ -1,8 +1,11 @@
 <?php
+
 namespace App\Http\Controllers\API;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
 use App\Album;
+// use Illuminate\Support\Facades\DB;
 
 class AlbumController extends BaseController
 {
@@ -12,12 +15,16 @@ class AlbumController extends BaseController
     }
     public function index(Request $request)
     {
-        $offset = $request->input('startFrom',0);
-        if($request->has('artist')){
+        $offset = $request->input('startFrom', 0);
+        if ($request->has('artist')) {
             $items = Album::where('artist_id', $request->input('artist'))->skip($offset)->take(10);
-        }
-        else if($request->has('name')){
-            $items = Album::whereRaw("UPPER(name) LIKE '%". strtoupper($request->input('name'))."%'")->skip($offset)->take(10)->get();
+        } else if ($request->has('name')) {
+            $items = Album::whereRaw("UPPER(albums.name) LIKE '%" . strtoupper($request->input('name')) . "%'")
+                ->join('artists', 'albums.artist_id', '=', 'artists.id')
+                ->select('albums.*', 'artists.name as artistName')
+                ->skip($offset)
+                ->take(10)
+                ->get();
         }
         // dd($items);
         return $this->sendResponse($items, 'Albums retrieved successfully.');

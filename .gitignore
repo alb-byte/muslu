@@ -13,3 +13,4 @@ yarn-error.log
 /data/**/*.m4a
 /data/**/*.m4v
 /data/**/*.jpg
+*.rar

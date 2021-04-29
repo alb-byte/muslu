@@ -1,20 +1,29 @@
 <?php
+
 namespace App\Http\Controllers\API;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
 use App\Song;
+use Illuminate\Support\Facades\Auth;
+
 class SongController extends BaseController
 {
     public function index(Request $request)
     {
-        $offset = $request->input('startFrom',0);
-        if($request->has('album')){
+        $offset = $request->input('startFrom', 0);
+        if ($request->has('album')) {
             $items = Song::where('album_id', $request->input('album'))->skip($offset)->take(10);
+        } else if ($request->has('name')) {
+            $items = Song::whereRaw("UPPER(songs.name) LIKE '%" . strtoupper($request->input('name')) . "%'")
+                ->join('albums', 'songs.album_id', '=', 'albums.id')
+                ->join('artists', 'albums.artist_id', '=', 'artists.id')
+                ->leftJoin('user_songs', 'songs.id', '=', 'user_songs.id')
+                ->select('songs.*', 'artists.name as artistName','user_songs.id as saved')
+                ->skip($offset)
+                ->take(10)
+                ->get();
         }
-        else if($request->has('name')){
-            $items = Song::whereRaw("UPPER(name) LIKE '%". strtoupper($request->input('name'))."%'")->skip($offset)->take(10)->get();
-        }
-        // // dd($items);
         return $this->sendResponse($items, 'Songs retrieved successfully.');
     }
     public function store(Request $request)
