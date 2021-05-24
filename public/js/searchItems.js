@@ -1,7 +1,7 @@
-import {redirect} from './router.js';
-import {starMouseEnter,starMouseLeave} from './star.js';
-import {AudioPlayer} from './player.js';
-import {Api} from './api.js';
+import { redirect } from './router.js';
+import { starMouseEnter, starMouseLeave } from './star.js';
+import { AudioPlayer } from './player.js';
+import { Api } from './api.js';
 
 function songClick(event) {
     let element = event.currentTarget;
@@ -26,10 +26,10 @@ function likeSong(e) {
     }
 }
 function albumClick(event) {
-    redirect(event.currentTarget.dataset.type, { album: event.currentTarget.id });
+    redirect(event.currentTarget.dataset.type , { album: event.currentTarget.id });
 }
 function artistClick(event) {
-    redirect(event.currentTarget.dataset.type, { id: event.currentTarget.id });
+    redirect(event.currentTarget.dataset.type , { id: event.currentTarget.id });
 }
 export function artistHtml(id, name) {
     let element = $(`<div id='${id}'
@@ -41,7 +41,7 @@ export function artistHtml(id, name) {
             </div>
         </div>
     </div>`);
-    element.click((e)=>artistClick(e));
+    element.click((e) => artistClick(e));
     return element;
 }
 export function albumHtml(id, name, artist) {
@@ -82,10 +82,10 @@ export function songHtml(id, name, audio, artist, saved) {
             </div>
         </div>
     </div>`);
-    element.find('i.fa-play').click((e)=>songClick(e));
+    element.find('i.fa-play').click((e) => songClick(e));
     let starElement = element.find('i.fa-star');
-    starElement.click((e)=>likeSong(e));
-    starElement.mouseleave((e)=>starMouseLeave(e));
-    starElement.mouseenter((e)=>starMouseEnter(e));
+    starElement.click((e) => likeSong(e));
+    starElement.mouseleave((e) => starMouseLeave(e));
+    starElement.mouseenter((e) => starMouseEnter(e));
     return element;
-}
+} 

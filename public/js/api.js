@@ -3,7 +3,8 @@ export let Api = {
         artists: "artists",
         albums: "albums",
         songs: "songs",
-    },
+        videos: "videos",
+    }, 
     baseUrl: "/api/",
     get(endpoint, props) {
         let token = sessionStorage.getItem("api_token");
@@ -14,11 +15,23 @@ export let Api = {
         return $.ajax({
             url,
             headers: {
-                "Authorization":'Bearer '+ token,
-                'Accept' : 'application/json',
+                "Authorization": 'Bearer ' + token,
+                'Accept': 'application/json',
             }
         })
             .then(data => data)
+            .catch(() => console.log("FAIL"));
+    },
+    getOne(endpoint, id) {
+        let token = sessionStorage.getItem("api_token");
+        let url = this.baseUrl + endpoint + `/${id}`;
+        return $.ajax({
+            url,
+            headers: {
+                "Authorization": 'Bearer ' + token,
+                'Accept': 'application/json',
+            }
+        }).then(data => data)
             .catch(() => console.log("FAIL"));
     },
     post(endpoint, data) {

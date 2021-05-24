@@ -1,5 +1,5 @@
 export function redirect(page, props) {
-    let url = page + ".php?";
+    let url = page + "?";
     for (var property in props) {
         url += `${property}=${props[property]}&`;
     }

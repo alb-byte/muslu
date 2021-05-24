@@ -13,6 +13,7 @@
         </div>
         @include('components.albumPage.albumInfo')
     </div>
-    <div id="parm" hidden>{{$album}}</div>
+    <div id="albumParam" hidden>{{$album}}</div>
 </div>
+<script src="/js/album.js" type="module"></script>
 @endsection

@@ -7,4 +7,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/search', 'SearchController@index')->name('search');
-Route::get('/albums', 'AlbumController@index')->name('album');
+Route::get('/album', 'AlbumController@index')->name('album');
+Route::get('/artist', 'ArtistController@index')->name('artist');
+Route::get('/video', 'VideoController@index')->name('video');

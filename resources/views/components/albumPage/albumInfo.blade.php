@@ -1,7 +1,7 @@
 <div class="h-100 col-3 offset-1">
             <div class="row" style="height:7vh;">
                 <h6 id="artistName" class="col-10 text-center">Artist</h6>
-                <i id="albumId" style="color:#FEFF77;" onclick="likeAlbum(id,event)" class="col-2 fa-star fa-3x"></i>
+                <i id="albumId" style="color:#FEFF77;" class="col-2 fa-star fa-3x"></i>
             </div>
             <div class="row" style="height:7vh;">
                 <h6 id="albumName" class="col-10 text-center">Album</h6>

@@ -10,7 +10,7 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
-/data/**/*.m4a
-/data/**/*.m4v
-/data/**/*.jpg
+/public/data/**/*.m4a
+/public/data/**/*.m4v
+/public/data/**/*.jpg
 *.rar

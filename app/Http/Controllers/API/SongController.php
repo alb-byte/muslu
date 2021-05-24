@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
 use App\Song;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class SongController extends BaseController
 {
@@ -13,13 +14,25 @@ class SongController extends BaseController
     {
         $offset = $request->input('startFrom', 0);
         if ($request->has('album')) {
-            $items = Song::where('album_id', $request->input('album'))->skip($offset)->take(10);
+
+            DB::enableQueryLog(); // Enable query log
+
+            $items = Song::whereRaw("album_id=" . $request->input('album'))
+                ->join('albums', 'songs.album_id', '=', 'albums.id')
+                ->join('artists', 'albums.artist_id', '=', 'artists.id')
+                ->leftJoin('user_songs', 'songs.id', '=', 'user_songs.id')
+                ->select('songs.*', 'artists.name as artistName','user_songs.id as saved')
+                ->skip($offset)
+                ->take(10)
+                ->get();
+
+            // dd(DB::getQueryLog()); // Show results of log
         } else if ($request->has('name')) {
             $items = Song::whereRaw("UPPER(songs.name) LIKE '%" . strtoupper($request->input('name')) . "%'")
                 ->join('albums', 'songs.album_id', '=', 'albums.id')
                 ->join('artists', 'albums.artist_id', '=', 'artists.id')
                 ->leftJoin('user_songs', 'songs.id', '=', 'user_songs.id')
-                ->select('songs.*', 'artists.name as artistName','user_songs.id as saved')
+                ->select('songs.*', 'artists.name as artistName', 'user_songs.id as saved')
                 ->skip($offset)
                 ->take(10)
                 ->get();
