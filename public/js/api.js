@@ -4,11 +4,14 @@ export let Api = {
         albums: "albums",
         songs: "songs",
         videos: "videos",
+        userSongs:"user_songs",
+        userAlbums:"user_albums",
+        userVideos:"user_videos",
     }, 
     baseUrl: "/api/",
     get(endpoint, props) {
         let token = sessionStorage.getItem("api_token");
-        let url = this.baseUrl + endpoint + `?api_token=${token}&`;
+        let url = this.baseUrl + endpoint + `?`;
         for (var property in props) {
             url += `${property}=${props[property]}&`;
         }
@@ -35,13 +38,19 @@ export let Api = {
             .catch(() => console.log("FAIL"));
     },
     post(endpoint, data) {
+        let token = sessionStorage.getItem("api_token");
         let url = this.baseUrl + endpoint + "";
+        console.log(data);
         return $.ajax({
             type: "POST",
             url,
-            data
+            data,
+            headers: {
+                "Authorization": 'Bearer ' + token,
+                'Accept': 'application/json',
+            }
         })
-            .then(data => JSON.parse(data))
+            // .then(data => JSON.parse(data))
             .then(obj => obj)
             .catch(() => console.log("FAIL"));
     },

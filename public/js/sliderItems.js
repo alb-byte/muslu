@@ -28,7 +28,7 @@ const deleteItem = (event) => {
         $(".slider_wrapper").children(`#${item.id}`).remove();
     }
 }
-const songHtml = (id, photo, name, audio, artistName) => {
+export function songHtml(id, photo, name, audio, artistName){
     return (`
     <div id='${id}' class="slider_item">
     <div class="hover">
@@ -48,11 +48,10 @@ const songHtml = (id, photo, name, audio, artistName) => {
         <div class="name">${name}</div>
         <div class="additionalInfo">${artistName}</div>
     </div>
-</div>
-`)
+</div>`)
 }
 
-const albumHtml = (id, photo, name, artistName) => {
+export function albumHtml (id, photo, name, artistName) {
     return (`
     <div id='${id}' class="slider_item">
     <div class="hover">
@@ -72,11 +71,10 @@ const albumHtml = (id, photo, name, artistName) => {
         <div class="name">${name}</div>
         <div class="additionalInfo">${artistName}</div>
     </div>
-</div>
-`)
+</div>`)
 }
 
-const videoHtml = (id, photo, name, artistName) => {
+export function videoHtml(id, photo, name, artistName){
     return (`
     <div id='${id}' class="slider_item">
     <div class="hover">
@@ -96,6 +94,5 @@ const videoHtml = (id, photo, name, artistName) => {
         <div class="name">${name}</div>
         <div class="additionalInfo">${artistName}</div>
     </div>
-</div>
-`)
+</div>`)
 }

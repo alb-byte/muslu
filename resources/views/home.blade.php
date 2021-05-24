@@ -7,7 +7,7 @@
     @include('components.homePage.buttonPanel')
     @include('components.homePage.slider')
 </div>
-<script>
+<script type="module">
     import {ready} from '/js/homePage.js';
     document.addEventListener("DOMContentLoaded", ready);
 </script>

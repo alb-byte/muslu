@@ -1,4 +1,4 @@
-function onchangeSliderChildren() {
+export function onchangeSliderChildren() {
     let count = $(".slider_item").length;
     $(".range_slider").attr("max", count - 4);
     $(".slider_item").hover(

@@ -1,4 +1,5 @@
 import { Api } from './api.js';
+import { starMouseEnter, starMouseLeave } from './star.js';
 
 export const playVideo = (event) => {
     let videoPlayer = $("#myvideo")[0];
@@ -14,11 +15,10 @@ export const playVideo = (event) => {
     }
 }
 
-export const likeVideo = (videoId, e) => {
+export const likeVideo = (id, e) => {
     if (!e.target.classList.contains("saved")) {
-        Api.post("user_video", { videoId })
-            .then(response => console.log(response));
-        e.target.classList.add("saved");
+        Api.post(Api.endpoints.userVideos, { id })
+            .then(response => e.target.classList.add("saved"));
     }
 }
 document.addEventListener("DOMContentLoaded", () => {
@@ -37,8 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
             } else
                 $("#videoId")[0].classList.add("far");
             $("#videoId")[0].id = video.id;
-
-            subscribeChangeStars();
-
         });
+        $('#videoId').mouseleave((e) => starMouseLeave(e));
+        $('#videoId').mouseenter((e) => starMouseEnter(e));
 });

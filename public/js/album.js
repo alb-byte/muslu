@@ -1,5 +1,6 @@
 import { Api } from './api.js';
 import { songHtml } from './albumSongItems.js';
+import { starMouseEnter, starMouseLeave } from './star.js';
 
 let convertMsecToMin = (msec) => {
     let min = Math.floor(msec / 60000).toString();
@@ -16,13 +17,10 @@ let convertSecToHour = (sec) => {
     return hour + ":" + min;
 }
 
-let likeAlbum = (albumId, e) => {
+let likeAlbum = (id, e) => {
     if (!e.target.classList.contains("saved")) {
-        Api.post("user_album", {
-            albumId
-        })
-            .then(response => console.log(response));
-        e.target.classList.add("saved");
+        Api.post(Api.endpoints.userAlbums, { id })
+            .then(response => e.target.classList.add("saved"));
     }
 }
 
@@ -43,6 +41,8 @@ function getAlbumInfoFromServer(id) {
             $("#songCount")[0].textContent = album.countOfTrack;
             $("#year")[0].textContent = album.releaseDate.substr(0, 4);
         });
+    $('#albumId').mouseleave((e) => starMouseLeave(e));
+    $('#albumId').mouseenter((e) => starMouseEnter(e));
     $('#albumId').click((e) => likeAlbum(e.target.id, e));
 }
 

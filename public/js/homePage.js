@@ -4,6 +4,10 @@
 <script src="/scripts/player.js"></script>
 <script src="/scripts/sliderItems.js"></script>
 <script src="/scripts/sliderScript.js"></script> */}
+
+import { Api } from './api.js';
+import { songHtml, albumHtml, videoHtml } from './sliderItems.js'
+import { onchangeSliderChildren } from './sliderScript.js'
 export function toggleContent(e) {
     clearSlider();
     setDefaultBtnColor();
@@ -55,7 +59,7 @@ export function toggleContent(e) {
     e.target.style.color = "white";
 }
 
-export function ready(){
+export function ready() {
     if (!sessionStorage.getItem("api_token")) {
         var req = new XMLHttpRequest();
         req.open('GET', document.location, false);
@@ -65,9 +69,8 @@ export function ready(){
     }
 
     let owner = $("#login")[0].innerText;
-    Api.get("user_song", {
-        owner
-    })
+    Api.get(Api.endpoints.userSongs)
+        .then(response => response.data)
         .then(songs => {
             console.log(songs);
             songs.forEach(song => {
