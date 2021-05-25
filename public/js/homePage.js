@@ -1,22 +1,15 @@
-
-{/* <script src="/scripts/router.js"></script>
-<script src="/scripts/api.js"></script>
-<script src="/scripts/player.js"></script>
-<script src="/scripts/sliderItems.js"></script>
-<script src="/scripts/sliderScript.js"></script> */}
-
 import { Api } from './api.js';
-import { songHtml, albumHtml, videoHtml } from './sliderItems.js'
-import { onchangeSliderChildren } from './sliderScript.js'
+import { songHtml, albumHtml, videoHtml } from './sliderItems.js';
+import { onchangeSliderChildren, clearSlider, setDefaultBtnColor } from './sliderScript.js';
+
 export function toggleContent(e) {
     clearSlider();
     setDefaultBtnColor();
     let owner = $("#login")[0].innerText;
     switch (e.target.id) {
         case "videoButton":
-            Api.get("user_video", {
-                owner
-            })
+            Api.get(Api.endpoints.userVideos, {})
+                .then(response => response.data)
                 .then(videos => {
                     console.log(videos);
                     videos.forEach(video => {
@@ -28,9 +21,8 @@ export function toggleContent(e) {
             $(".slider").attr("data-typeItem", "video");
             break;
         case "albumButton":
-            Api.get("user_album", {
-                owner
-            })
+            Api.get(Api.endpoints.userAlbums, {})
+                .then(response => response.data)
                 .then(albums => {
                     console.log(albums);
                     albums.forEach(album => {
@@ -42,9 +34,8 @@ export function toggleContent(e) {
             $(".slider").attr("data-typeItem", "album");
             break;
         case "songButton":
-            Api.get("user_song", {
-                owner
-            })
+            Api.get(Api.endpoints.userSongs, {})
+                .then(response => response.data)
                 .then(songs => {
                     console.log(songs);
                     songs.forEach(song => {

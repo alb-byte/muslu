@@ -4,10 +4,11 @@ export let Api = {
         albums: "albums",
         songs: "songs",
         videos: "videos",
-        userSongs:"user_songs",
-        userAlbums:"user_albums",
-        userVideos:"user_videos",
-    }, 
+        userSongs: "user_songs",
+        userAlbums: "user_albums",
+        userVideos: "user_videos",
+        admin: "admin"
+    },
     baseUrl: "/api/",
     get(endpoint, props) {
         let token = sessionStorage.getItem("api_token");
@@ -54,16 +55,17 @@ export let Api = {
             .then(obj => obj)
             .catch(() => console.log("FAIL"));
     },
-    delete(endpoint, props) {
-        let url = this.baseUrl + endpoint + "?";
-        for (var property in props) {
-            url += `${property}=${props[property]}&`;
-        }
+    delete(endpoint, id) {
+        let token = sessionStorage.getItem("api_token");
+        let url = this.baseUrl + endpoint + "/" + id;
         return $.ajax({
             type: "DELETE",
-            url
+            url,
+            headers: {
+                "Authorization": 'Bearer ' + token,
+                'Accept': 'application/json',
+            }
         })
-            .then(data => JSON.parse(data))
             .then(obj => obj)
             .catch(() => console.log("FAIL"));
     },

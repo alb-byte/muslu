@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 
-class VideoController extends Controller
+class AdminController extends Controller
 {
     public function __construct()
     {
@@ -13,10 +13,10 @@ class VideoController extends Controller
     public function index()
     {
         return view(
-            'video',
+            'admin',
             [
                 'name' => Auth::user()->name,
-                'video' => request('video'),
+                'album' => request('album'),
                 'search' => '',
                 'isAdmin' => Auth::user()->isAdmin
             ]

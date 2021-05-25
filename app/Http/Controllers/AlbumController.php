@@ -12,6 +12,14 @@ class AlbumController extends Controller
     }
     public function index()
     {
-        return view('album', ['name' => Auth::user()->name, 'album' => request('album'), 'search' => '']);
+        return view(
+            'album',
+            [
+                'name' => Auth::user()->name,
+                'album' => request('album'),
+                'search' => '',
+                'isAdmin' => Auth::user()->isAdmin
+            ]
+        );
     }
 }

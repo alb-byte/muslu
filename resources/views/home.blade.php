@@ -8,7 +8,11 @@
     @include('components.homePage.slider')
 </div>
 <script type="module">
-    import {ready} from '/js/homePage.js';
+    import {
+        ready,
+        toggleContent
+    } from '/js/homePage.js';
+    $(".btn").click(e => toggleContent(e));
     document.addEventListener("DOMContentLoaded", ready);
 </script>
 @endsection

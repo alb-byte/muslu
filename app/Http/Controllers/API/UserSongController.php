@@ -30,7 +30,7 @@ class UserSongController extends BaseController
     {
         $input = $request->all();
 
-        $item = UserSong::create(["user_id" => $request->user()->id, "song_id" => $input["id"]]);
+        $item = UserSong::create(["user_id" => auth()->user()->id, "song_id" => $input["id"]]);
         return $this->sendResponse($item->toArray(), 'Album created successfully.');
     }
     public function show($id)
@@ -41,16 +41,9 @@ class UserSongController extends BaseController
         }
         return $this->sendResponse($item->toArray(), 'Album retrieved successfully.');
     }
-    public function update(Request $request, UserSong $item)
+    public function destroy($id)
     {
-        $input = $request->all();
-        $item->name = $input['name'];
-        $item->save();
-        return $this->sendResponse($item->toArray(), 'Product updated successfully.');
-    }
-    public function destroy(UserSong $item)
-    {
-        $item->delete();
-        return $this->sendResponse($item->toArray(), 'Album deleted successfully.');
+        $item = UserSong::where(["user_id" => auth()->user()->id, "song_id" => $id])->delete();
+        return $this->sendResponse($item, 'Album deleted successfully.');
     }
 }

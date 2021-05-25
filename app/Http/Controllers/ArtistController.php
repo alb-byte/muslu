@@ -13,6 +13,14 @@ class ArtistController extends Controller
     }
     public function index()
     {
-        return view('artist', ['name' => Auth::user()->name, 'id' => request('id'), 'search' => '']);
+        return view(
+            'artist',
+            [
+                'name' => Auth::user()->name,
+                'id' => request('id'),
+                'search' => '',
+                'isAdmin' => Auth::user()->isAdmin
+            ]
+        );
     }
 }

@@ -11,8 +11,12 @@ class UserAlbumController extends BaseController
     }
     public function index()
     {
-        $items = UserAlbum::all();
-        return $this->sendResponse($items->toArray(), 'Albums retrieved successfully.');
+        $items = UserAlbum::where('user_albums.user_id', auth()->user()->id)
+        ->join('albums', 'albums.id', '=', 'user_albums.album_id')
+        ->join('artists', 'albums.artist_id', '=', 'artists.id')
+        ->select('albums.*', 'artists.name as artistName')
+        ->get();
+    return $this->sendResponse($items, 'Albums retrieved successfully.');
     }
     public function store(Request $request)
     {
@@ -29,16 +33,16 @@ class UserAlbumController extends BaseController
         }
         return $this->sendResponse($item->toArray(), 'Album retrieved successfully.');
     }
-    public function update(Request $request, UserAlbum $item)
+    // public function update(Request $request, UserAlbum $item)
+    // {
+    //     $input = $request->all();
+    //     $item->name = $input['name'];
+    //     $item->save();
+    //     return $this->sendResponse($item->toArray(), 'Product updated successfully.');
+    // }
+    public function destroy($id)
     {
-        $input = $request->all();
-        $item->name = $input['name'];
-        $item->save();
-        return $this->sendResponse($item->toArray(), 'Product updated successfully.');
-    }
-    public function destroy(UserAlbum $item)
-    {
-        $item->delete();
-        return $this->sendResponse($item->toArray(), 'Album deleted successfully.');
+        $item = UserAlbum::where(["user_id" => auth()->user()->id, "album_id" => $id])->delete();
+        return $this->sendResponse($item, 'Album deleted successfully.');
     }
 }

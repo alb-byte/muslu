@@ -2,7 +2,7 @@ export function onchangeSliderChildren() {
     let count = $(".slider_item").length;
     $(".range_slider").attr("max", count - 4);
     $(".slider_item").hover(
-        function() {
+        function () {
             $(this).css("border", "2px solid black");
             $(".name", this).css("color", " #575757");
             $(".additionalInfo", this).css("color", " #575757");
@@ -10,7 +10,7 @@ export function onchangeSliderChildren() {
             $(".itemPhoto", this).stop().fadeOut(400);
             $(".messager", this).css("display", "flex").stop().fadeIn(400);
         },
-        function() {
+        function () {
             $(this).css("border", "2px solid rgb(206, 206, 206)");
             $(".name", this).css("color", "black");
             $(".additionalInfo", this).css("color", "black");
@@ -56,13 +56,13 @@ export function onchangeSliderChildren() {
             }
         }
     }
-    $(".range_slider").mousedown(function() { $(".range_slider").on("input", Translate) });
-    $(".range_slider").mouseup(function() { this.blur() });
+    $(".range_slider").mousedown(function () { $(".range_slider").on("input", Translate) });
+    $(".range_slider").mouseup(function () { this.blur() });
 
-    $(document).keydown(function(event) {
+    $(document).keydown(function (event) {
         if (event.code == "ArrowRight") TranslateKey("right");
         else if (event.code == "ArrowLeft") TranslateKey("left");
     });
 };
-const clearSlider = () => $(".slider_wrapper").empty();
-const setDefaultBtnColor = () => $(".mainControll").css("color", "#FEFF77");
+export function clearSlider() { $(".slider_wrapper").empty() };
+export function setDefaultBtnColor() { $(".mainControll").css("color", "#FEFF77") };

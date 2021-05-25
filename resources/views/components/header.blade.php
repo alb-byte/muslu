@@ -13,6 +13,13 @@
                 </svg></button>
         </div>
     </div>
+    @isset($isAdmin)
+    @if ($isAdmin === 1)
+    <a class="col-1 my-auto mx-auto text-center" href="{{route('admin')}}">
+        <i style="color:#FEFF77;" class="fas fa-user-shield fa-2x"></i>
+    </a>
+    @endif
+    @endisset
     <a class="col-1 my-auto mx-auto text-center" style="color: white; font-size: larger;" href="{{ route('logout') }}" onclick="event.preventDefault();
         document.getElementById('logout-form').submit();">
         Выход
