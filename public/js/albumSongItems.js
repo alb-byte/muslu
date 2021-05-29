@@ -15,10 +15,11 @@ function songClick(event) {
     }
     AudioPlayer.play(element.dataset.id, element.dataset.song);
 }
+
 function likeSong(e, id) {
     if (!e.target.classList.contains("saved")) {
         Api.post(Api.endpoints.userSongs, { id })
-            .then(response => e.target.classList.add("saved"))
+        e.target.classList.add("saved");
     }
 }
 
@@ -36,10 +37,10 @@ export function songHtml(number, name, time, audio, id, saved) {
                   data-songstatus='false'
                   data-id='${id}'></i>
             </div>
-            <div class="col-7 text-center">
+            <div class="col-6 text-center">
                 ${name}
             </div>
-            <div class="col-2 text-center">
+            <div class="col-3 text-center">
                 ${time}
             </div>
             <i style="color:#FEFF77;" 
@@ -51,4 +52,4 @@ export function songHtml(number, name, time, audio, id, saved) {
     starElement.mouseleave((e) => starMouseLeave(e));
     starElement.mouseenter((e) => starMouseEnter(e));
     return element;
-}; 
+};

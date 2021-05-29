@@ -18,13 +18,12 @@ export const playVideo = (event) => {
 export const likeVideo = (id, e) => {
     if (!e.target.classList.contains("saved")) {
         Api.post(Api.endpoints.userVideos, { id })
-            .then(response => e.target.classList.add("saved"));
+        e.target.classList.add("saved");
     }
 }
-document.addEventListener("DOMContentLoaded", () => {
+export function ready(){
     let videoPlayer = $("#myvideo")[0];
     Api.getOne(Api.endpoints.videos, $("#parm")[0].innerText)
-        .then(response => response.data)
         .then(video => {
             videoPlayer.poster = video.photo;
             let srcElement = document.createElement("source");
@@ -38,6 +37,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 $("#videoId")[0].classList.add("far");
             $("#videoId")[0].id = video.id;
         });
-        $('#videoId').mouseleave((e) => starMouseLeave(e));
-        $('#videoId').mouseenter((e) => starMouseEnter(e));
-});
+    $('#videoId').mouseleave((e) => starMouseLeave(e));
+    $('#videoId').mouseenter((e) => starMouseEnter(e));
+};

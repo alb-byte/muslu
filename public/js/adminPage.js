@@ -14,9 +14,7 @@ const toggleContent = (e) => {
     const { props, template } = map.get(e.target.id);
 
     Api.get(Api.endpoints.admin, props)
-        .then(response => response.data)
         .then(items => {
-            console.log(items);
             items?.forEach(item => {
                 itemNodes.append(template(item));
             });
@@ -26,7 +24,6 @@ const toggleContent = (e) => {
 let itemNodes = $("#itemList");
 export function ready() {
     Api.get(Api.endpoints.admin, { song: true })
-        .then(response => response.data)
         .then(songs => {
             console.log(songs);
             songs?.forEach(song => {

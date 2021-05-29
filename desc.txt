@@ -10,3 +10,5 @@ php artisan preset none = delete react and vue
 php artisan route:list
 php artisan cache:clear
 php artisan make:migration add_api_token --table=users
+php artisan make:middleware AdminFilter
+php artisan route:list

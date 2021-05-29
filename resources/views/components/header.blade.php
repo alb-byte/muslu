@@ -21,15 +21,20 @@
     @endif
     @endisset
     <a class="col-1 my-auto mx-auto text-center" style="color: white; font-size: larger;" href="{{ route('logout') }}" onclick="event.preventDefault();
+        localStorage.clear();
         document.getElementById('logout-form').submit();">
         Выход
     </a>
-    <div id="login" hidden></div>
     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
         @csrf
     </form>
 </div>
 <script>
+    $('#data').keydown((event) => {
+        if (event.keyCode == 13)
+            search();
+    });
+
     function search() {
         String.prototype.isEmpty = function() {
             return (this.length === 0 || !this.trim());

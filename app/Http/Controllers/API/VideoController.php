@@ -26,12 +26,6 @@ class VideoController extends BaseController
         }
         return $this->sendResponse($items, 'Videos retrieved successfully.');
     }
-    public function store(Request $request)
-    {
-        $input = $request->all();
-        $item = Artist::create($input);
-        return $this->sendResponse($item->toArray(), 'Album created successfully.');
-    }
     public function show($id)
     {
         $video = Video::where('id',$id)->first();
@@ -41,17 +35,5 @@ class VideoController extends BaseController
             return $this->sendError('Video not found.');
         }
         return $this->sendResponse($video, 'Video retrieved successfully.');
-    }
-    public function update(Request $request, Artist $item)
-    {
-        $input = $request->all();
-        $item->name = $input['name'];
-        $item->save();
-        return $this->sendResponse($item->toArray(), 'Product updated successfully.');
-    }
-    public function destroy(Artist $item)
-    {
-        $item->delete();
-        return $this->sendResponse($item->toArray(), 'Album deleted successfully.');
     }
 }

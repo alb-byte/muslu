@@ -4,7 +4,7 @@
 <div class="container-fluid mainbox">
     <div class="row">
         <div class="col-3 offset-9">
-            <a href="index.php"><img src="./static/images/minilogo.svg" width="160" height="80"></a>
+            <a href="{{route('start')}}"><img src="/images/minilogo.svg" width="160" height="80"></a>
         </div>
     </div>
 
@@ -27,9 +27,9 @@
                         @enderror
                     </div>
                 </div>
-                <div class="row h-25 align-items-center">
+                <div class="row h-25 justify-content-center" style="margin-top:20px">
                     <div class="col">
-                        <input type="submit" class="col-8 offset-2 mainbutton" value="Получить ссылку" />
+                        <input type="submit" class="col-12  mainbutton" value="Получить ссылку" />
                     </div>
                 </div>
             </form>

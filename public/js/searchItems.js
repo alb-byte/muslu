@@ -16,17 +16,20 @@ function songClick(event) {
     }
     AudioPlayer.play(element.dataset.id, element.dataset.song);
 }
+
 function likeSong(e, id) {
     if (!e.target.classList.contains("saved")) {
         Api.post(Api.endpoints.userSongs, { id })
-            .then(response => e.target.classList.add("saved"))
+        e.target.classList.add("saved");
     }
 }
+
 function albumClick(event) {
-    redirect(event.currentTarget.dataset.type , { album: event.currentTarget.id });
+    redirect(event.currentTarget.dataset.type, { album: event.currentTarget.id });
 }
+
 function artistClick(event) {
-    redirect(event.currentTarget.dataset.type , { id: event.currentTarget.id });
+    redirect(event.currentTarget.dataset.type, { id: event.currentTarget.id });
 }
 export function artistHtml(id, name) {
     let element = $(`<div id='${id}'
@@ -81,8 +84,8 @@ export function songHtml(id, name, audio, artist, saved) {
     </div>`);
     element.find('i.fa-play').click((e) => songClick(e));
     let starElement = element.find('i.fa-star');
-    starElement.click((e) => likeSong(e,id));
+    starElement.click((e) => likeSong(e, id));
     starElement.mouseleave((e) => starMouseLeave(e));
     starElement.mouseenter((e) => starMouseEnter(e));
     return element;
-} 
+}

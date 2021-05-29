@@ -25,21 +25,6 @@ class UserAlbumController extends BaseController
         $item = UserAlbum::create(["user_id"=>$request->user()->id,"album_id"=>$input["id"]]);
         return $this->sendResponse($item->toArray(), 'Album created successfully.');
     }
-    public function show($id)
-    {
-        $item = UserAlbum::find($id);
-        if (is_null($item)) {
-            return $this->sendError('Album not found.');
-        }
-        return $this->sendResponse($item->toArray(), 'Album retrieved successfully.');
-    }
-    // public function update(Request $request, UserAlbum $item)
-    // {
-    //     $input = $request->all();
-    //     $item->name = $input['name'];
-    //     $item->save();
-    //     return $this->sendResponse($item->toArray(), 'Product updated successfully.');
-    // }
     public function destroy($id)
     {
         $item = UserAlbum::where(["user_id" => auth()->user()->id, "album_id" => $id])->delete();

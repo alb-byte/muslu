@@ -18,9 +18,12 @@
     "containerId"=>"videoNodes",
     "containerColor"=>"#1f1e1efd"
     ]);
-    
+
     <div class="row" style="height:7vh;"></div>
     <div id="artistId" hidden>{{$id}}</div>
-    <script src="/js/artist.js" type="module"></script>
 </div>
+<script type="module">
+    import {ready} from '/js/artistPage.js';
+    document.addEventListener("DOMContentLoaded", ready);
+</script>
 @endsection

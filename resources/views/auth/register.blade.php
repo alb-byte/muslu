@@ -50,11 +50,14 @@
                         @enderror
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                    <div class="col-md-6">
-                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                <div class="row">
+                    <div class="col-10 offset-1 text-center">
+                        <h6>Повторите пароль</h6>
+                        <input type="password" id="password-confirm" autocomplete="new-password"
+                        class="form-control" name="password_confirmation" />
+                        @error('password_confirmation')
+                        <span class="text-danger">{{$message}}</span>
+                        @enderror
                     </div>
                 </div>
                 <div class="row">

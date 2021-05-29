@@ -16,12 +16,6 @@ class ArtistController extends BaseController
         }
         return $this->sendResponse($items, 'Artist retrieved successfully.');
     }
-    public function store(Request $request)
-    {
-        $input = $request->all();
-        $item = Artist::create($input);
-        return $this->sendResponse($item->toArray(), 'Album created successfully.');
-    }
     public function show($id)
     {
         $artist = Artist::where('artists.id',$id)
@@ -32,17 +26,5 @@ class ArtistController extends BaseController
             return $this->sendError('Artist not found.');
         }
         return $this->sendResponse($artist, 'Artist retrieved successfully.');
-    }
-    public function update(Request $request, Artist $item)
-    {
-        $input = $request->all();
-        $item->name = $input['name'];
-        $item->save();
-        return $this->sendResponse($item->toArray(), 'Product updated successfully.');
-    }
-    public function destroy(Artist $item)
-    {
-        $item->delete();
-        return $this->sendResponse($item->toArray(), 'Album deleted successfully.');
     }
 }

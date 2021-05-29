@@ -14,7 +14,6 @@ videoNodes.scroll(scrollCb((startFrom) => getVideosFromServer(artistId, startFro
 
 function getAlbumsFromServer(artistId, startFrom) {
     Api.get(Api.endpoints.albums, { artistId, startFrom })
-        .then(response => response.data)
         .then(albums => {
             console.log(albums);
             albums.forEach(album => {
@@ -24,7 +23,6 @@ function getAlbumsFromServer(artistId, startFrom) {
 }
 function getVideosFromServer(artistId, startFrom) {
     Api.get(Api.endpoints.videos, { artistId, startFrom })
-        .then(response => response.data)
         .then(videos => {
             console.log(videos);
             videos.forEach(video => {
@@ -33,9 +31,8 @@ function getVideosFromServer(artistId, startFrom) {
         });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+export function ready() {
     Api.getOne(Api.endpoints.artists, artistId)
-        .then(response => response.data)
         .then(artist => {
             console.log(artist);
             $("#artistName")[0].textContent = artist.name;
@@ -51,4 +48,4 @@ document.addEventListener("DOMContentLoaded", () => {
             getAlbumsFromServer(artistId);
             getVideosFromServer(artistId);
         });
-});
+};

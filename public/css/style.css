@@ -1,78 +1,79 @@
 body {
-    background-image: url("/images/bg-index.png");
-    background-size: 100%;
+  background-image: url("/images/bg-index.png");
+  background-size: 100%;
 }
 
 h2,
 h3 {
-    color: #FEFF77;
-    font-family: "Planet N 2 cyr-lat";
+  color: #FEFF77;
+  font-family: "Planet N 2 cyr-lat";
 }
 
 h1,
 h4,
 h5,
 h6 {
-    color: #FEFF77;
-    font-family: "comfortaa";
+  color: #FEFF77;
+  font-family: "comfortaa";
 }
 
 .mainbutton {
-    background: #fdfdfd2f;
-    color: #FEFF77;
-    font-family: "Planet N 2 cyr-lat";
-    height: 40px;
+  background: #fdfdfd2f;
+  color: #FEFF77;
+  font-family: "Planet N 2 cyr-lat";
+  height: 40px;
 }
 
 .mainbutton:hover {
-    border: #FEFF77;
-    border-width: 12px;
+  border: #FEFF77;
+  border-width: 12px;
 }
 
 .mainbox {
-    height: 100vh;
+  height: 100vh;
 }
 
 .formbox {
-    background: #f5f4f42f;
+  background: #f5f4f42f;
 }
 
 .icon {
-    color: #FEFF77;
+  color: #FEFF77;
 }
 
 .mediaLink {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .searchItem {
-    background-color: #9b9b9b;
-    font-size: 2vh;
-    font-family: 'comfortaa';
-    color: #FEFF77;
+  background-color: #9b9b9b;
+  font-size: 2vh;
+  font-family: "comfortaa";
+  color: #FEFF77;
 }
 
 .searchItemList {
-    background-color: #2c2c2c;
-    overflow-y: scroll;
-    height: 75vh;
+  background-color: #2c2c2c;
+  overflow-y: scroll;
+  height: 75vh;
 }
 
 .albumSongItem {
-    background-color: #9b9b9b;
-    height: 10vh;
-    font-size: 3vh;
-    font-family: 'comfortaa';
-    color: #FEFF77;
+  background-color: #9b9b9b;
+  height: 10vh;
+  font-size: 3vh;
+  font-family: "comfortaa";
+  color: #FEFF77;
 }
 
 .adminItem {
-    background-color: #9b9b9b;
-    font-size: 2vh;
-    font-family: 'comfortaa';
-    color: #FEFF77;
+  background-color: #9b9b9b;
+  font-size: 2vh;
+  font-family: "comfortaa";
+  color: #FEFF77;
 }
 
 .gradient-bg {
-    background: linear-gradient(#000, #6e6e6e);
+  background: linear-gradient(#000, #6e6e6e);
 }
+

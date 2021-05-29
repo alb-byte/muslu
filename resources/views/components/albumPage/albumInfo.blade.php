@@ -16,8 +16,8 @@
                 <h6 class="col text-center">Год</h6>
             </div>
             <div class="row text-center">
-                <h6 id="songCount" class="col text-center">text</h6>
-                <h6 id="hourCount" class="col text-center">text</h6>
-                <h6 id="year" class="col text-center">text</h6>
+                <h6 id="songCount" class="col-3 text-center"></h6>
+                <h6 id="duration" class="col-6 text-center"></h6>
+                <h6 id="year" class="col-3 text-center"></h6>
             </div>
         </div>

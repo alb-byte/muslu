@@ -2,32 +2,27 @@ import { Api } from './api.js';
 import { songHtml } from './albumSongItems.js';
 import { starMouseEnter, starMouseLeave } from './star.js';
 
-let convertMsecToMin = (msec) => {
-    let min = Math.floor(msec / 60000).toString();
-    let sec = Math.floor(Math.floor(msec / 1000) % 60).toString();
-    if (sec.length == 1)
-        sec = "0" + sec;
-    return min + ":" + sec;
-}
-let convertSecToHour = (sec) => {
-    let hour = Math.floor(sec / 3600).toString();
-    let min = Math.floor(Math.floor(sec / 60) % 60).toString();
-    if (min.length == 1)
-        min = "0" + min;
-    return hour + ":" + min;
+function timeConvert(fullTimeInSec) {
+    const hours = Math.floor(fullTimeInSec / 60 / 60);
+    const minutes = Math.floor(fullTimeInSec / 60) - (hours * 60);
+    const seconds = fullTimeInSec % 60;
+    return [
+        hours.toString().padStart(2, '0') + 'ч',
+        minutes.toString().padStart(2, '0') + 'м',
+        seconds.toString().padStart(2, '0') + 'с'
+    ].join(' ');
 }
 
 let likeAlbum = (id, e) => {
     if (!e.target.classList.contains("saved")) {
-        Api.post(Api.endpoints.userAlbums, { id })
-            .then(response => e.target.classList.add("saved"));
+        Api.post(Api.endpoints.userAlbums, { id });
+        e.target.classList.add("saved");
     }
 }
 
 function getAlbumInfoFromServer(id) {
     Api.getOne(Api.endpoints.albums, id)
-        .then(response => {
-            let album = response.data;
+        .then(album => {
             $("#artistName")[0].textContent = album.artistName;
             $("#albumName")[0].textContent = album.name;
             $("#albumPhoto")[0].src = album.photo;
@@ -50,19 +45,24 @@ function getSongsFromServer(album) {
     let secAlbumTime = 0;
     Api.get(Api.endpoints.songs, { album })
         .then(response => {
-            console.log(response);
-            response.data.forEach(song => {
-                secAlbumTime += Math.floor(song.time / 1000);
+            response.forEach(song => {
+                secAlbumTime += Math.floor(song.duration / 1000);
+                let time = timeConvert(Math.floor(song.duration / 1000));
                 $("#songsContainer")
-                    .append(songHtml(song.numberInAlbum, song.name,
-                        convertMsecToMin(song.duration), song.audio, song.id, song.saved));
+                    .append(songHtml(
+                        song.numberInAlbum,
+                        song.name,
+                        `${time.split(' ')[1]} ${time.split(' ')[2]}`,
+                        song.audio,
+                        song.id,
+                        song.saved
+                    ));
             });
-            $("#hourCount")[0].textContent = convertSecToHour(secAlbumTime);
+            $("#duration")[0].textContent = timeConvert(secAlbumTime);
         });
 }
-document.addEventListener("DOMContentLoaded", () => {
+export function ready() {
     let albumId = $("#albumParam")[0].innerHTML;
-    console.log(`albumId ${albumId}`);
     getAlbumInfoFromServer(albumId);
     getSongsFromServer(albumId);
-});
+};

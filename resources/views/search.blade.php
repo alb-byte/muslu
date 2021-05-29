@@ -7,5 +7,8 @@
     @include('components.searchPage.itemListHeader')
     @include('components.searchPage.itemListContainer')
 </div>
-<script src="/js/search.js" type="module"></script>
+<script type="module">
+    import {ready} from '/js/searchPage.js';
+    document.addEventListener("DOMContentLoaded", ready);
+</script>
 @endsection

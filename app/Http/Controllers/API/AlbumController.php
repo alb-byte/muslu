@@ -33,14 +33,7 @@ class AlbumController extends BaseController
                 ->take(10)
                 ->get();
         }
-        // dd($items);
         return $this->sendResponse($items, 'Albums retrieved successfully.');
-    }
-    public function store(Request $request)
-    {
-        $input = $request->all();
-        $album = Album::create($input);
-        return $this->sendResponse($album->toArray(), 'Album created successfully.');
     }
     public function show($id)
     {
@@ -54,17 +47,5 @@ class AlbumController extends BaseController
             return $this->sendError('Album not found.');
         }
         return $this->sendResponse($album, 'Album retrieved successfully.');
-    }
-    public function update(Request $request, Album $album)
-    {
-        $input = $request->all();
-        $album->name = $input['name'];
-        $album->save();
-        return $this->sendResponse($album->toArray(), 'Product updated successfully.');
-    }
-    public function destroy(Album $album)
-    {
-        $album->delete();
-        return $this->sendResponse($album->toArray(), 'Album deleted successfully.');
     }
 }

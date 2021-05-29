@@ -15,5 +15,8 @@
     </div>
     <div id="albumParam" hidden>{{$album}}</div>
 </div>
-<script src="/js/album.js" type="module"></script>
+<script type="module">
+    import {ready} from '/js/albumPage.js';
+    document.addEventListener("DOMContentLoaded", ready);
+</script>
 @endsection

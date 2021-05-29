@@ -44,7 +44,6 @@ export function onchangeSliderChildren() {
         if (direction == "right") {
             if (Number($(".range_slider").attr("max")) > position) {
                 $(".range_slider").val(++position);
-                console.log(position);
                 positionPX -= 234;
                 wrapper.css({ transform: `translateX(${positionPX}px)` });
             }

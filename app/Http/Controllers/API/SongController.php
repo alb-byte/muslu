@@ -45,30 +45,4 @@ class SongController extends BaseController
         }
         return $this->sendResponse($items, 'Songs retrieved successfully.');
     }
-    public function store(Request $request)
-    {
-        $input = $request->all();
-        $item = Song::create($input);
-        return $this->sendResponse($item->toArray(), 'Album created successfully.');
-    }
-    public function show($id)
-    {
-        $item = Song::find($id);
-        if (is_null($item)) {
-            return $this->sendError('Album not found.');
-        }
-        return $this->sendResponse($item->toArray(), 'Album retrieved successfully.');
-    }
-    public function update(Request $request, Song $item)
-    {
-        $input = $request->all();
-        $item->name = $input['name'];
-        $item->save();
-        return $this->sendResponse($item->toArray(), 'Product updated successfully.');
-    }
-    public function destroy(Song $item)
-    {
-        $item->delete();
-        return $this->sendResponse($item->toArray(), 'Album deleted successfully.');
-    }
 }

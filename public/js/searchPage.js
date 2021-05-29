@@ -3,8 +3,8 @@ import {
     albumHtml,
     songHtml,
 } from './searchItems.js';
-import {Api} from './api.js';
-import {scrollCb} from './scroll.js';
+import { Api } from './api.js';
+import { scrollCb } from './scroll.js';
 
 let artistNodes = $("#artistList");
 let albumNodes = $("#albumList");
@@ -15,8 +15,7 @@ function getArtistFromServer(name, startFrom) {
         name,
         startFrom
     }).then(response => {
-        console.log(response);
-        response.data.forEach(artist => {
+        response.forEach(artist => {
             artistNodes.append(artistHtml(artist.id, artist.name));
         });
     });
@@ -26,8 +25,7 @@ function getAlbumsFromServer(name, startFrom) {
         name,
         startFrom
     }).then(response => {
-        console.log(response);
-        response.data.forEach(album => {
+        response.forEach(album => {
             albumNodes.append(albumHtml(album.id, album.name, album.artistName));
         });
     });
@@ -36,13 +34,11 @@ function getSongsFromServer(name, startFrom) {
     Api.get(Api.endpoints.songs, {
         name,
         startFrom
-    })
-        .then(response => {
-            console.log(response);
-            response.data.forEach(song => {
-                songNodes.append(songHtml(song.id, song.name, song.audio, song.artistName, song.saved));
-            });
+    }).then(response => {
+        response.forEach(song => {
+            songNodes.append(songHtml(song.id, song.name, song.audio, song.artistName, song.saved));
         });
+    });
 }
 
 songNodes.scroll(scrollCb((startFrom) => {
@@ -55,9 +51,9 @@ artistNodes.scroll(scrollCb((startFrom) => {
     if ($("#data").val()) getArtistFromServer($("#data").val(), startFrom);
 }));
 
-document.addEventListener("DOMContentLoaded", () => {
+export function ready() {
     let name = $("#data").val();
     getArtistFromServer(name, null);
     getAlbumsFromServer(name, null);
     getSongsFromServer(name, null);
-});
+};

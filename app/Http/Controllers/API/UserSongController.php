@@ -33,14 +33,6 @@ class UserSongController extends BaseController
         $item = UserSong::create(["user_id" => auth()->user()->id, "song_id" => $input["id"]]);
         return $this->sendResponse($item->toArray(), 'Album created successfully.');
     }
-    public function show($id)
-    {
-        $item = UserSong::find($id);
-        if (is_null($item)) {
-            return $this->sendError('Album not found.');
-        }
-        return $this->sendResponse($item->toArray(), 'Album retrieved successfully.');
-    }
     public function destroy($id)
     {
         $item = UserSong::where(["user_id" => auth()->user()->id, "song_id" => $id])->delete();

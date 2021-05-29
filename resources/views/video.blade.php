@@ -15,10 +15,14 @@
     </div>
     <div id="parm" hidden>{{$video}}</div>
 </div>
-<script src="/js/video.js" type="module"></script>
 <script type="module">
-    import {playVideo,likeVideo} from '/js/video.js';
+    import {
+        playVideo,
+        likeVideo,
+        ready
+    } from '/js/videoPage.js';
+    document.addEventListener("DOMContentLoaded", ready);
     $('i.fa-play').click((e) => playVideo(e));
-    $('i.fa-star').click((e) => likeVideo(e.currentTarget.id,e));
+    $('i.fa-star').click((e) => likeVideo(e.currentTarget.id, e));
 </script>
 @endsection

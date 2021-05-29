@@ -41,14 +41,11 @@
                         @enderror
                     </div>
                 </div>
-                <div class="form-group row">
-                    <div class="col-md-6 offset-md-4">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="remember" id="remember">
-                            <label class="form-check-label" for="remember">
-                                Запомнить меня
-                            </label>
-                        </div>
+                <div class="row justufy-content-center">
+                    <div class="col-10 offset-1 text-center">
+                        <h6>Запомнить меня</h6>
+                        <input class=" col" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                        <br>
                     </div>
                 </div>
                 <div class="row">
